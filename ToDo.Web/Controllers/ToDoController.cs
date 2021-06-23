@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using ToDo.Web.Models;
 
@@ -9,10 +10,52 @@ namespace ToDo.Web.Controllers
     public class ToDoController : ControllerBase
     {
         // Beter (ipv static variabelen) is natuurlijk een database gebruiken (via Entity Framework).
-        // Hieronder wordt een 'Dicationary' gebruikt: dat is een structuur waarin je met een sleutel
+        // Hieronder wordt een 'Dictionary' gebruikt: dat is een structuur waarin je met een sleutel
         // op zoek kan gaan naar een overeenkomstige waarde. Je kan het zien als een woordenboek
         // waarbij de 'key' het woord is, en de 'value' is het de verklaring van dat woord.
+        // In het geval van de ToDo applicatie is de sleutel een integer (= de sleutel) en een ToDoItem de value.
         private static Dictionary<int, ToDoItem> _toDoItems = new Dictionary<int, ToDoItem>();
+
+        /// <summary>
+        /// Dit is een 'static' constructor. 
+        /// Een 'static' constructor wordt éénmalig (bij het laden van de class) uitgevoerd.
+        /// Deze static constructor zorgt voor het toevoegen van een aantal dummy ToDo items...
+        /// </summary>
+        static ToDoController()
+        {
+            int id = ToDoItem.GetNextId();
+            _toDoItems.Add(id, new ToDoItem()
+            {
+                Id = id,
+                Titel = "ToDo opdracht implementeren",
+                Omschrijving = "De herkaningsingsopdracht voor front end gevorderd implementeren",
+                Deadline = new System.DateTime(2021, 8, 10, 23,59,59),
+                ToegewezenAan = Environment.UserName,
+                Afgewerkt = false
+            });
+
+            id = ToDoItem.GetNextId();
+            _toDoItems.Add(id, new ToDoItem()
+            {
+                Id = id,
+                Titel = "Verslag uitschrijven",
+                Omschrijving = "Een verslag schrijven over je ervaring(en) met deze herkaningsopdracht.",
+                Deadline = new System.DateTime(2021, 8, 10, 23, 59, 59),
+                ToegewezenAan = Environment.UserName,
+                Afgewerkt = false
+            });
+
+            id = ToDoItem.GetNextId();
+            _toDoItems.Add(id, new ToDoItem()
+            {
+                Id = id,
+                Titel = "Presentatie/demo voorbereiden",
+                Omschrijving = "De herkaningsingsopdracht zal ook moeten gedemonstreerd worden.",
+                Deadline = new System.DateTime(2021, 8, 10, 23, 59, 59),
+                ToegewezenAan = Environment.UserName,
+                Afgewerkt = false
+            });
+        }
 
         /// <summary>
         /// Ophalen van alle ToDo items via een GET naar /url/todo
@@ -43,7 +86,7 @@ namespace ToDo.Web.Controllers
         /// Aanmaken (onthouden) van een nieuwe ToDo item komende van de front end.
         /// </summary>
         /// <param name="toDoItem">JSON met ToDoItem object. De Id van het object stel je best in op -1, maar eigenlijk doet het er niet echt toe.</param>
-        /// <returns>JSON met daarin een number (het id).</returns>
+        /// <returns>JSON met daarin een number (het toegekende id).</returns>
         [HttpPost]
         public int Post([FromBody] ToDoItem toDoItem)
         {
@@ -68,6 +111,7 @@ namespace ToDo.Web.Controllers
                 _toDoItems[toDoItem.Id].Omschrijving = toDoItem.Omschrijving;
                 _toDoItems[toDoItem.Id].ToegewezenAan = toDoItem.ToegewezenAan;
                 _toDoItems[toDoItem.Id].Deadline = toDoItem.Deadline;
+                _toDoItems[toDoItem.Id].Afgewerkt = toDoItem.Afgewerkt;
             }            
         }
 

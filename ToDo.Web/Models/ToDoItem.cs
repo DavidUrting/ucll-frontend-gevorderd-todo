@@ -22,5 +22,6 @@ namespace ToDo.Web.Models
         public string Omschrijving { get; set; }
         public string ToegewezenAan { get; set; }
         public DateTime? Deadline { get; set; }
+        public bool Afgewerkt { get; set; }
     }
 }
