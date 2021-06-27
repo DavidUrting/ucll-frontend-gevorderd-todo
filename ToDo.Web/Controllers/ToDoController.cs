@@ -28,8 +28,8 @@ namespace ToDo.Web.Controllers
             {
                 Id = id,
                 Titel = "ToDo opdracht implementeren",
-                Omschrijving = "De herkaningsingsopdracht voor front end gevorderd implementeren",
-                Deadline = new System.DateTime(2021, 8, 10, 23,59,59),
+                Omschrijving = "De herkansingsopdracht voor front end gevorderd implementeren",
+                Deadline = new System.DateTime(2021, 8, 8, 23,59,59),
                 ToegewezenAan = Environment.UserName,
                 Afgewerkt = false
             });
@@ -39,8 +39,8 @@ namespace ToDo.Web.Controllers
             {
                 Id = id,
                 Titel = "Verslag uitschrijven",
-                Omschrijving = "Een verslag schrijven over je ervaring(en) met deze herkaningsopdracht.",
-                Deadline = new System.DateTime(2021, 8, 10, 23, 59, 59),
+                Omschrijving = "Een verslag schrijven over je ervaring(en) met deze herkansingsopdracht.",
+                Deadline = new System.DateTime(2021, 8, 8, 23, 59, 59),
                 ToegewezenAan = Environment.UserName,
                 Afgewerkt = false
             });
@@ -50,8 +50,8 @@ namespace ToDo.Web.Controllers
             {
                 Id = id,
                 Titel = "Presentatie/demo voorbereiden",
-                Omschrijving = "De herkaningsingsopdracht zal ook moeten gedemonstreerd worden.",
-                Deadline = new System.DateTime(2021, 8, 10, 23, 59, 59),
+                Omschrijving = "De herkansingsopdracht zal ook kort gedemonstreerd worden.",
+                Deadline = new System.DateTime(2021, 8, 8, 23, 59, 59),
                 ToegewezenAan = Environment.UserName,
                 Afgewerkt = false
             });
